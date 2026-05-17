@@ -1,0 +1,357 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8D806E31F9EC46F086F353BD /* RatyKredytoweApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3960BA8D1248AC8D58391C /* RatyKredytoweApp.swift */; };
+		4BA77C0576C64942B7F5890C /* Loan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314D9040CF0D4BFBA5D85553 /* Loan.swift */; };
+		147F6DAA6C854192AA687DC2 /* Installment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEECBFBAD71B401BB6E5DE6D /* Installment.swift */; };
+		AE5D82DF76CF4CBDA9CD480E /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = A808A4F7FE73471CBF0F348A /* Formatters.swift */; };
+		6FE30CE69F0A45C69D2CCC40 /* InstallmentGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484A013900A64F3D8EAFBD28 /* InstallmentGenerator.swift */; };
+		A1B2C3D4E5F6478990ABCDEF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C2D3E4F5A6478990ABCDEF /* ContentView.swift */; };
+		A2B3C4D5E6F7478990ABCDEF /* LoanSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3D4E5F6A7478990ABCDEF /* LoanSidebarView.swift */; };
+		A3B4C5D6E7F8478990ABCDEF /* LoanDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C4D5E6F7A8478990ABCDEF /* LoanDetailView.swift */; };
+		A4B5C6D7E8F9478990ABCDEF /* InstallmentRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C5D6E7F8A9478990ABCDEF /* InstallmentRowView.swift */; };
+		A5B6C7D8E9FA578990ABCDEF /* AddLoanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C6D7E8F9AA578990ABCDEF /* AddLoanView.swift */; };
+		A6B7C8D9EAFB678990ABCDEF /* AddInstallmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C7D8E9FAAB678990ABCDEF /* AddInstallmentView.swift */; };
+		E1F2A3B4C5D6478990ABCDEF /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E2D3C4B5A6478990ABCDEF /* AppTheme.swift */; };
+		E2F3A4B5C6D7478990ABCDEF /* UIComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E3D4C5B6A7478990ABCDEF /* UIComponents.swift */; };
+		E3F4A5B6C7D8478990ABCDEF /* LoanCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E4D5C6B7A8478990ABCDEF /* LoanCardView.swift */; };
+		26E2E953AD9142BE9CF98C1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D0F98550AD84C54950DC506 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		C56F7B0DA28843CE9F3AA44A /* RatyKredytowe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RatyKredytowe.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D3960BA8D1248AC8D58391C /* RatyKredytoweApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatyKredytoweApp.swift; sourceTree = "<group>"; };
+		314D9040CF0D4BFBA5D85553 /* Loan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loan.swift; sourceTree = "<group>"; };
+		CEECBFBAD71B401BB6E5DE6D /* Installment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Installment.swift; sourceTree = "<group>"; };
+		A808A4F7FE73471CBF0F348A /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
+		484A013900A64F3D8EAFBD28 /* InstallmentGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallmentGenerator.swift; sourceTree = "<group>"; };
+		B1C2D3E4F5A6478990ABCDEF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B2C3D4E5F6A7478990ABCDEF /* LoanSidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanSidebarView.swift; sourceTree = "<group>"; };
+		B3C4D5E6F7A8478990ABCDEF /* LoanDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanDetailView.swift; sourceTree = "<group>"; };
+		B4C5D6E7F8A9478990ABCDEF /* InstallmentRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallmentRowView.swift; sourceTree = "<group>"; };
+		B5C6D7E8F9AA578990ABCDEF /* AddLoanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLoanView.swift; sourceTree = "<group>"; };
+		B6C7D8E9FAAB678990ABCDEF /* AddInstallmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInstallmentView.swift; sourceTree = "<group>"; };
+		F1E2D3C4B5A6478990ABCDEF /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		F2E3D4C5B6A7478990ABCDEF /* UIComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIComponents.swift; sourceTree = "<group>"; };
+		F3E4D5C6B7A8478990ABCDEF /* LoanCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanCardView.swift; sourceTree = "<group>"; };
+		2D0F98550AD84C54950DC506 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2D0F98550AD84C54950DC505 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		962936A9CF3A4E02964F5408 = {
+			isa = PBXGroup;
+			children = (
+				7C050FB7A31B43A2903D0700 /* RatyKredytowe */,
+				E688A91C4BDE4AB0B696E810 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E688A91C4BDE4AB0B696E810 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C56F7B0DA28843CE9F3AA44A /* RatyKredytowe.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7C050FB7A31B43A2903D0700 /* RatyKredytowe */ = {
+			isa = PBXGroup;
+			children = (
+				5D3960BA8D1248AC8D58391C /* RatyKredytoweApp.swift */,
+				C1D2E3F4A5B6478990ABCDEF /* Models */,
+				C2D3E4F5A6B7478990ABCDEF /* Views */,
+				C4D5E6F7A8B9478990ABCDEF /* Components */,
+				C5D6E7F8A9BA578990ABCDEF /* Theme */,
+				C3D4E5F6A7B8478990ABCDEF /* Utilities */,
+				2D0F98550AD84C54950DC506 /* Assets.xcassets */,
+			);
+			path = RatyKredytowe;
+			sourceTree = "<group>";
+		};
+		C1D2E3F4A5B6478990ABCDEF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				314D9040CF0D4BFBA5D85553 /* Loan.swift */,
+				CEECBFBAD71B401BB6E5DE6D /* Installment.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C2D3E4F5A6B7478990ABCDEF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B1C2D3E4F5A6478990ABCDEF /* ContentView.swift */,
+				B2C3D4E5F6A7478990ABCDEF /* LoanSidebarView.swift */,
+				B3C4D5E6F7A8478990ABCDEF /* LoanDetailView.swift */,
+				B4C5D6E7F8A9478990ABCDEF /* InstallmentRowView.swift */,
+				B5C6D7E8F9AA578990ABCDEF /* AddLoanView.swift */,
+				B6C7D8E9FAAB678990ABCDEF /* AddInstallmentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C3D4E5F6A7B8478990ABCDEF /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A808A4F7FE73471CBF0F348A /* Formatters.swift */,
+				484A013900A64F3D8EAFBD28 /* InstallmentGenerator.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		C4D5E6F7A8B9478990ABCDEF /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				F2E3D4C5B6A7478990ABCDEF /* UIComponents.swift */,
+				F3E4D5C6B7A8478990ABCDEF /* LoanCardView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		C5D6E7F8A9BA578990ABCDEF /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				F1E2D3C4B5A6478990ABCDEF /* AppTheme.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		23EA5D39A044453BA96FE454 /* RatyKredytowe */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F538DF93E4AE49C9A833AFC4 /* Build configuration list for PBXNativeTarget "RatyKredytowe" */;
+			buildPhases = (
+				DE3590F0AE61468FA34BC263 /* Sources */,
+				2D0F98550AD84C54950DC505 /* Frameworks */,
+				26E2E953AD9142BE9CF98C1C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RatyKredytowe;
+			productName = RatyKredytowe;
+			productReference = C56F7B0DA28843CE9F3AA44A /* RatyKredytowe.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		484A013900A64F3D8EAFBD27 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2600;
+				LastUpgradeCheck = 2600;
+				TargetAttributes = {
+					23EA5D39A044453BA96FE454 = {
+						CreatedOnToolsVersion = 26.0;
+					};
+				};
+			};
+			buildConfigurationList = F0C6A505245847ABB082D92F /* Build configuration list for PBXProject "RatyKredytowe" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = pl;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				pl,
+				Base,
+			);
+			mainGroup = 962936A9CF3A4E02964F5408;
+			productRefGroup = E688A91C4BDE4AB0B696E810 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				23EA5D39A044453BA96FE454 /* RatyKredytowe */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		26E2E953AD9142BE9CF98C1C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				26E2E953AD9142BE9CF98C1D /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DE3590F0AE61468FA34BC263 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D806E31F9EC46F086F353BD /* RatyKredytoweApp.swift in Sources */,
+				4BA77C0576C64942B7F5890C /* Loan.swift in Sources */,
+				147F6DAA6C854192AA687DC2 /* Installment.swift in Sources */,
+				AE5D82DF76CF4CBDA9CD480E /* Formatters.swift in Sources */,
+				6FE30CE69F0A45C69D2CCC40 /* InstallmentGenerator.swift in Sources */,
+				A1B2C3D4E5F6478990ABCDEF /* ContentView.swift in Sources */,
+				A2B3C4D5E6F7478990ABCDEF /* LoanSidebarView.swift in Sources */,
+				A3B4C5D6E7F8478990ABCDEF /* LoanDetailView.swift in Sources */,
+				A4B5C6D7E8F9478990ABCDEF /* InstallmentRowView.swift in Sources */,
+				A5B6C7D8E9FA578990ABCDEF /* AddLoanView.swift in Sources */,
+				A6B7C8D9EAFB678990ABCDEF /* AddInstallmentView.swift in Sources */,
+				E1F2A3B4C5D6478990ABCDEF /* AppTheme.swift in Sources */,
+				E2F3A4B5C6D7478990ABCDEF /* UIComponents.swift in Sources */,
+				E3F4A5B6C7D8478990ABCDEF /* LoanCardView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		D1E2F3A4B5C6478990ABCDEF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D2E3F4A5B6C7478990ABCDEF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		D3E4F5A6B7C8478990ABCDEF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Raty Kredytowe";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pl.arkadiusz.RatyKredytowe;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D4E5F6A7B8C9478990ABCDEF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Raty Kredytowe";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pl.arkadiusz.RatyKredytowe;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F0C6A505245847ABB082D92F /* Build configuration list for PBXProject "RatyKredytowe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1E2F3A4B5C6478990ABCDEF /* Debug */,
+				D2E3F4A5B6C7478990ABCDEF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F538DF93E4AE49C9A833AFC4 /* Build configuration list for PBXNativeTarget "RatyKredytowe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D3E4F5A6B7C8478990ABCDEF /* Debug */,
+				D4E5F6A7B8C9478990ABCDEF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 484A013900A64F3D8EAFBD27 /* Project object */;
+}
