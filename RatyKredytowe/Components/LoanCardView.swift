@@ -71,6 +71,9 @@ struct LoanCardView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(AppTheme.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: AppTheme.cardCornerRadius, style: .continuous))
-        .shadow(color: AppTheme.cardShadow, radius: 6, y: 2)
+        .overlay {
+            RoundedRectangle(cornerRadius: AppTheme.cardCornerRadius, style: .continuous)
+                .strokeBorder(AppTheme.border, lineWidth: 1)
+        }
     }
 }

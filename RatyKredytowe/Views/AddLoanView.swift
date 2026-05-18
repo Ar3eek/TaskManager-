@@ -3,7 +3,6 @@ import SwiftUI
 
 struct AddLoanView: View {
     @Environment(\.modelContext) private var modelContext
-    @Environment(\.dismiss) private var dismiss
 
     @State private var name = ""
     @State private var note = ""
@@ -16,81 +15,67 @@ struct AddLoanView: View {
         let normalized = installmentAmount
             .replacingOccurrences(of: " ", with: "")
             .replacingOccurrences(of: ",", with: ".")
-        guard !normalized.isEmpty, let value = Decimal(string: normalized) else {
-            return nil
-        }
+        guard !normalized.isEmpty, let value = Decimal(string: normalized) else { return nil }
         return value > 0 ? value : nil
     }
 
     private var canSave: Bool {
         let hasName = !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         guard hasName else { return false }
-        if generateSchedule {
-            return parsedAmount != nil && installmentCount > 0
-        }
+        if generateSchedule { return parsedAmount != nil && installmentCount > 0 }
         return true
     }
 
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: AppTheme.spacingL) {
-                    formCard(title: "Kredyt") {
+        ModalFormShell(
+            title: "Nowy kredyt",
+            saveDisabled: !canSave,
+            onSave: save
+        ) {
+            VStack(alignment: .leading, spacing: AppTheme.spacingL) {
+                FormSectionCard(title: "Kredyt") {
+                    VStack(alignment: .leading, spacing: AppTheme.spacingM) {
                         FormField(title: "Nazwa") {
-                            StyledTextField(
-                                placeholder: "np. Hipoteka, samochód…",
-                                text: $name
-                            )
+                            StyledTextField(placeholder: "np. Hipoteka, samochód…", text: $name)
                         }
                         FormField(title: "Notatka") {
-                            StyledTextField(
-                                placeholder: "Opcjonalnie",
-                                text: $note
-                            )
+                            StyledTextField(placeholder: "Opcjonalnie", text: $note)
                         }
                     }
+                }
 
-                    formCard(title: "Harmonogram") {
+                FormSectionCard(title: "Harmonogram") {
+                    VStack(alignment: .leading, spacing: AppTheme.spacingM) {
                         Toggle(isOn: $generateSchedule) {
-                            VStack(alignment: .leading, spacing: 2) {
+                            VStack(alignment: .leading, spacing: 4) {
                                 Text("Wygeneruj raty")
-                                    .font(.subheadline.weight(.semibold))
+                                    .font(AppFont.body(.semibold))
                                 Text("Miesięczne raty od wybranej daty")
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
+                                    .font(AppFont.caption())
+                                    .foregroundStyle(AppTheme.textSecondary)
                             }
                         }
                         .tint(AppTheme.primary)
 
-                        if generateSchedule {
-                            Divider().padding(.vertical, 4)
-
+                        VStack(alignment: .leading, spacing: AppTheme.spacingM) {
                             FormField(title: "Kwota raty") {
                                 amountField
                             }
 
                             FormField(title: "Liczba rat") {
                                 HStack {
-                                    Button {
+                                    stepButton(systemName: "minus") {
                                         if installmentCount > 1 { installmentCount -= 1 }
-                                    } label: {
-                                        Image(systemName: "minus.circle.fill")
-                                            .font(.title2)
-                                            .foregroundStyle(AppTheme.primary)
                                     }
                                     Text("\(installmentCount)")
-                                        .font(.title2.weight(.bold))
+                                        .font(AppFont.title(.bold))
                                         .frame(maxWidth: .infinity)
                                         .monospacedDigit()
-                                    Button {
+                                    stepButton(systemName: "plus") {
                                         if installmentCount < 600 { installmentCount += 1 }
-                                    } label: {
-                                        Image(systemName: "plus.circle.fill")
-                                            .font(.title2)
-                                            .foregroundStyle(AppTheme.primary)
                                     }
                                 }
-                                .padding(.vertical, 8)
+                                .padding(.vertical, 4)
                             }
 
                             FormField(title: "Pierwsza rata") {
@@ -107,84 +92,59 @@ struct AddLoanView: View {
                                 summaryBox(amount: amount)
                             }
                         }
+                        .opacity(generateSchedule ? 1 : 0)
+                        .disabled(!generateSchedule)
+                        .frame(minHeight: generateSchedule ? nil : 280)
+                        .accessibilityHidden(!generateSchedule)
                     }
-
-                    Button("Zapisz kredyt") { save() }
-                        .buttonStyle(PrimaryButtonStyle(isDisabled: !canSave))
-                        .disabled(!canSave)
-                }
-                .padding(AppTheme.spacingM)
-                .padding(.bottom, AppTheme.spacingXL)
-            }
-            .scrollIndicators(.hidden)
-            .appScreenBackground()
-            .navigationTitle("Nowy kredyt")
-            #if os(iOS)
-            .navigationBarTitleDisplayMode(.inline)
-            #endif
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Anuluj") { dismiss() }
-                        .foregroundStyle(.secondary)
+                    .animation(.easeInOut(duration: 0.2), value: generateSchedule)
                 }
             }
         }
-        #if os(macOS)
-        .frame(minWidth: 440, minHeight: 560)
-        #endif
     }
 
     @ViewBuilder
     private var amountField: some View {
         #if os(iOS)
-        StyledTextField(
-            placeholder: "np. 2500",
-            text: $installmentAmount,
-            keyboardType: .decimalPad
-        )
+        StyledTextField(placeholder: "np. 2500", text: $installmentAmount, keyboardType: .decimalPad)
         #else
-        StyledTextField(
-            placeholder: "np. 2500",
-            text: $installmentAmount
-        )
+        StyledTextField(placeholder: "np. 2500", text: $installmentAmount)
         #endif
     }
 
-    private func formCard<Content: View>(title: String, @ViewBuilder content: () -> Content) -> some View {
-        VStack(alignment: .leading, spacing: AppTheme.spacingM) {
-            Text(title)
-                .font(.headline)
-            content()
+    private func stepButton(systemName: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: "\(systemName).circle.fill")
+                .font(.title2)
+                .foregroundStyle(AppTheme.primary)
         }
-        .appCard()
+        .buttonStyle(.plain)
     }
 
     private func summaryBox(amount: Decimal) -> some View {
         VStack(spacing: AppTheme.spacingS) {
             HStack {
                 Text("Łącznie do spłaty")
-                    .foregroundStyle(.secondary)
+                    .font(AppFont.caption())
+                    .foregroundStyle(AppTheme.textSecondary)
                 Spacer()
                 Text(Formatters.currency(amount * Decimal(installmentCount)))
-                    .font(.headline.weight(.bold))
+                    .font(AppFont.body(.bold))
                     .foregroundStyle(AppTheme.primary)
             }
-            if let lastDate = Calendar.current.date(
-                byAdding: .month,
-                value: installmentCount - 1,
-                to: firstDueDate
-            ) {
+            if let lastDate = Calendar.current.date(byAdding: .month, value: installmentCount - 1, to: firstDueDate) {
                 HStack {
                     Text("Ostatnia rata")
-                        .foregroundStyle(.secondary)
+                        .font(AppFont.caption())
+                        .foregroundStyle(AppTheme.textSecondary)
                     Spacer()
                     Text(Formatters.date(lastDate))
-                        .font(.subheadline.weight(.medium))
+                        .font(AppFont.caption(.medium))
                 }
             }
         }
         .padding(AppTheme.spacingM)
-        .background(AppTheme.primarySoft.opacity(0.35))
+        .background(AppTheme.primarySoft.opacity(0.5))
         .clipShape(RoundedRectangle(cornerRadius: AppTheme.cornerRadius, style: .continuous))
     }
 
@@ -202,21 +162,10 @@ struct AddLoanView: View {
                 firstDueDate: firstDueDate
             )
             for item in schedule {
-                let installment = Installment(
-                    dueDate: item.dueDate,
-                    amount: item.amount,
-                    loan: loan
-                )
+                let installment = Installment(dueDate: item.dueDate, amount: item.amount, loan: loan)
                 modelContext.insert(installment)
                 loan.installments.append(installment)
             }
         }
-
-        dismiss()
     }
-}
-
-#Preview {
-    AddLoanView()
-        .modelContainer(for: [Loan.self, Installment.self], inMemory: true)
 }

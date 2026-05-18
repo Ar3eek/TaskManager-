@@ -3,7 +3,6 @@ import SwiftUI
 
 struct AddInstallmentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Environment(\.dismiss) private var dismiss
 
     let loan: Loan
 
@@ -16,25 +15,25 @@ struct AddInstallmentView: View {
         let normalized = amountText
             .replacingOccurrences(of: " ", with: "")
             .replacingOccurrences(of: ",", with: ".")
-        guard !normalized.isEmpty, let value = Decimal(string: normalized) else {
-            return nil
-        }
+        guard !normalized.isEmpty, let value = Decimal(string: normalized) else { return nil }
         return value > 0 ? value : nil
     }
 
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: AppTheme.spacingL) {
+        ModalFormShell(
+            title: "Nowa rata",
+            saveDisabled: parsedAmount == nil,
+            saveLabel: "Dodaj",
+            onSave: save
+        ) {
+            VStack(alignment: .leading, spacing: AppTheme.spacingL) {
+                FormSectionCard(title: "Szczegóły raty") {
                     VStack(alignment: .leading, spacing: AppTheme.spacingM) {
-                        Text("Szczegóły raty")
-                            .font(.headline)
-
                         FormField(title: "Termin płatności") {
                             DatePicker("", selection: $dueDate, displayedComponents: .date)
                                 .datePickerStyle(.graphical)
                                 .tint(AppTheme.primary)
-                                .padding(AppTheme.spacingS)
+                                .padding(AppTheme.spacingM)
                                 .background(AppTheme.appBackground)
                                 .clipShape(RoundedRectangle(cornerRadius: AppTheme.cornerRadius, style: .continuous))
                         }
@@ -49,44 +48,19 @@ struct AddInstallmentView: View {
 
                         Toggle(isOn: $markAsPaid) {
                             Label("Już spłacona", systemImage: "checkmark.circle")
-                                .font(.subheadline.weight(.medium))
+                                .font(AppFont.body())
                         }
                         .tint(AppTheme.primary)
                     }
-                    .appCard()
-
-                    Button("Dodaj ratę") { save() }
-                        .buttonStyle(PrimaryButtonStyle(isDisabled: parsedAmount == nil))
-                        .disabled(parsedAmount == nil)
-                }
-                .padding(AppTheme.spacingM)
-            }
-            .scrollIndicators(.hidden)
-            .appScreenBackground()
-            .navigationTitle("Nowa rata")
-            #if os(iOS)
-            .navigationBarTitleDisplayMode(.inline)
-            #endif
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Anuluj") { dismiss() }
-                        .foregroundStyle(.secondary)
                 }
             }
         }
-        #if os(macOS)
-        .frame(minWidth: 400, minHeight: 520)
-        #endif
     }
 
     @ViewBuilder
     private var amountField: some View {
         #if os(iOS)
-        StyledTextField(
-            placeholder: "np. 2500",
-            text: $amountText,
-            keyboardType: .decimalPad
-        )
+        StyledTextField(placeholder: "np. 2500", text: $amountText, keyboardType: .decimalPad)
         #else
         StyledTextField(placeholder: "np. 2500", text: $amountText)
         #endif
@@ -105,11 +79,5 @@ struct AddInstallmentView: View {
         )
         modelContext.insert(installment)
         loan.installments.append(installment)
-        dismiss()
     }
-}
-
-#Preview {
-    AddInstallmentView(loan: Loan(name: "Test"))
-        .modelContainer(for: [Loan.self, Installment.self], inMemory: true)
 }

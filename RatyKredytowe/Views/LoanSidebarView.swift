@@ -193,7 +193,7 @@ struct SidebarLoanRow: View {
             VStack(alignment: .leading, spacing: 3) {
                 HStack(spacing: 4) {
                     Text(loan.name)
-                        .font(.subheadline.weight(.semibold))
+                        .font(AppFont.body(.semibold))
                         .lineLimit(1)
                     if loan.isFullyPaid {
                         Image(systemName: "checkmark.seal.fill")
@@ -212,8 +212,8 @@ struct SidebarLoanRow: View {
                         Text("Brak rat")
                     }
                 }
-                .font(.caption)
-                .foregroundStyle(.secondary)
+                .font(AppFont.caption2())
+                .foregroundStyle(AppTheme.textSecondary)
                 .lineLimit(1)
             }
 
@@ -238,19 +238,19 @@ struct SidebarSummaryView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Podsumowanie")
-                .font(.caption.weight(.semibold))
-                .foregroundStyle(.secondary)
-                .textCase(.uppercase)
+            Text("PODSUMOWANIE")
+                .font(AppFont.labelUppercase)
+                .foregroundStyle(AppTheme.textTertiary)
+                .tracking(0.5)
 
             Text(Formatters.currency(stats.totalRemaining))
-                .font(.title3.weight(.bold))
+                .font(AppFont.title(.bold))
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
 
             Text("pozostało do spłaty")
-                .font(.caption)
-                .foregroundStyle(.secondary)
+                .font(AppFont.caption())
+                .foregroundStyle(AppTheme.textSecondary)
 
             HStack(spacing: 12) {
                 summaryChip("\(stats.activeLoansCount)", label: "kredytów")
@@ -260,19 +260,21 @@ struct SidebarSummaryView: View {
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(12)
+        .padding(14)
         .background(AppTheme.cardBackground)
-        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .clipShape(RoundedRectangle(cornerRadius: AppTheme.cardCornerRadius, style: .continuous))
+        .overlay {
+            RoundedRectangle(cornerRadius: AppTheme.cardCornerRadius, style: .continuous)
+                .strokeBorder(AppTheme.border, lineWidth: 1)
+        }
     }
 
     private func summaryChip(_ value: String, label: String, warning: Bool = false) -> some View {
         HStack(spacing: 4) {
-            Text(value)
-                .font(.caption.weight(.bold))
-            Text(label)
-                .font(.caption2)
+            Text(value).font(AppFont.caption(.bold))
+            Text(label).font(AppFont.caption2())
         }
-        .foregroundStyle(warning ? AppTheme.danger : .secondary)
+        .foregroundStyle(warning ? AppTheme.danger : AppTheme.textSecondary)
     }
 }
 
@@ -280,26 +282,11 @@ struct SidebarSummaryView: View {
 
 struct SelectLoanPlaceholderView: View {
     var body: some View {
-        VStack(spacing: 20) {
-            Image(systemName: "list.bullet.rectangle")
-                .font(.system(size: 52))
-                .foregroundStyle(AppTheme.primary.opacity(0.5))
-                .symbolRenderingMode(.hierarchical)
-
-            VStack(spacing: 8) {
-                Text("Raty kredytowe")
-                    .font(.title2.weight(.bold))
-                Text("Wybierz kredyt po lewej stronie,\naby zobaczyć harmonogram i oznaczać spłacone raty.")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
-            }
-
-            Label("Kliknij kredyt na liście", systemImage: "arrow.left")
-                .font(.caption.weight(.medium))
-                .foregroundStyle(.tertiary)
-        }
-        .padding(32)
+        EmptyStateView(
+            icon: "creditcard",
+            title: "Raty kredytowe",
+            message: "Wybierz kredyt z listy, aby zobaczyć harmonogram i oznaczać spłacone raty."
+        )
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .appScreenBackground()
     }

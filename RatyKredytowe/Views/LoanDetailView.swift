@@ -39,13 +39,18 @@ struct LoanDetailView: View {
             VStack(alignment: .leading, spacing: metrics.sectionSpacing) {
                 summaryBar
                 filterBar
+
+                Text("Stuknij kółko przy racie, aby oznaczyć spłatę")
+                    .font(AppFont.caption())
+                    .foregroundStyle(AppTheme.textSecondary)
+
                 installmentsList
             }
             .padding(metrics.horizontalPadding)
             .padding(.bottom, AppTheme.spacingXL)
-            .frame(maxWidth: 640)
-            .frame(maxWidth: .infinity)
+            .responsiveContentWidth()
         }
+        .scrollIndicators(.hidden)
         .appScreenBackground()
         .navigationTitle("Raty kredytowe")
         #if os(iOS)
@@ -135,12 +140,7 @@ struct LoanDetailView: View {
     }
 
     private var filterBar: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text("Kliknij kółko przy racie, aby oznaczyć spłatę")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-            FilterChipBar(selection: $filter, options: InstallmentFilter.allCases)
-        }
+        FilterChipBar(selection: $filter, options: InstallmentFilter.allCases)
     }
 
     private var installmentsList: some View {

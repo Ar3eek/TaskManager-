@@ -1,61 +1,49 @@
-import SwiftData
 import SwiftUI
 
 struct ContentView: View {
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
-    @State private var selectedLoan: Loan?
-
-    private var layoutMetrics: LayoutMetrics {
-        LayoutMetrics.from(horizontalSizeClass: horizontalSizeClass)
-    }
-
-    private var usesSplitLayout: Bool {
-        #if os(macOS)
-        true
-        #else
-        horizontalSizeClass == .regular
-        #endif
-    }
-
     var body: some View {
-        Group {
-            if usesSplitLayout {
-                splitLayout
-            } else {
-                phoneLayout
+        GeometryReader { geometry in
+            let metrics = LayoutMetrics.resolve(
+                width: geometry.size.width,
+                horizontalSizeClass: horizontalSizeClass
+            )
+
+            NavigationStack {
+                HomeView()
+                    .navigationDestination(for: AppModule.self) { module in
+                        moduleDestination(for: module)
+                    }
             }
-        }
-        .environment(\.layoutMetrics, layoutMetrics)
-    }
-
-    private var splitLayout: some View {
-        NavigationSplitView {
-            LoanSidebarView(selectedLoan: $selectedLoan)
-                .navigationSplitViewColumnWidth(min: 260, ideal: 300, max: 340)
-        } detail: {
-            detailPane
-        }
-    }
-
-    private var phoneLayout: some View {
-        NavigationStack {
-            LoanSidebarView(usesStackNavigation: true)
+            .environment(\.layoutMetrics, metrics)
+            .tint(AppTheme.primary)
+            .appScreenBackground()
         }
     }
 
     @ViewBuilder
-    private var detailPane: some View {
-        if let loan = selectedLoan {
-            LoanDetailView(loan: loan, onDeleted: { selectedLoan = nil })
-                .id(loan.persistentModelID)
-        } else {
-            SelectLoanPlaceholderView()
+    private func moduleDestination(for module: AppModule) -> some View {
+        switch module {
+        case .loans:
+            LoansRootView()
+        case .notebook:
+            NotebookListView()
+        case .goals:
+            GoalsListView()
+        case .quickLinks:
+            QuickLinksListView()
         }
     }
 }
 
 #Preview {
     ContentView()
-        .modelContainer(for: [Loan.self, Installment.self], inMemory: true)
+        .modelContainer(for: [
+            Loan.self,
+            Installment.self,
+            NotebookEntry.self,
+            SavingsGoal.self,
+            QuickLink.self
+        ], inMemory: true)
 }

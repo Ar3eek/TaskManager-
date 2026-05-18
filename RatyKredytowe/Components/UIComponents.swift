@@ -8,17 +8,15 @@ struct DashboardHeroView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: AppTheme.spacingM) {
-            VStack(alignment: .leading, spacing: 4) {
-                Text("Pozostało do spłaty")
-                    .font(.caption.weight(.medium))
-                    .foregroundStyle(.white.opacity(0.85))
+            Text("Pozostało do spłaty")
+                .font(AppFont.caption(.medium))
+                .foregroundStyle(.white.opacity(0.8))
 
-                Text(Formatters.currency(stats.totalRemaining))
-                    .font(.system(size: metrics.heroAmountSize, weight: .bold, design: .rounded))
-                    .foregroundStyle(.white)
-                    .minimumScaleFactor(0.65)
-                    .lineLimit(1)
-            }
+            Text(Formatters.currency(stats.totalRemaining))
+                .font(AppFont.metric(metrics.heroAmountSize))
+                .foregroundStyle(.white)
+                .minimumScaleFactor(0.65)
+                .lineLimit(1)
 
             HStack(spacing: AppTheme.spacingS) {
                 HeroStatPill(value: "\(stats.activeLoansCount)", label: "Kredyty", icon: "building.columns")
@@ -36,11 +34,10 @@ struct DashboardHeroView: View {
                 )
             }
         }
-        .padding(metrics.cardInset + 4)
+        .padding(metrics.cardInset + 2)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(AppTheme.heroGradient)
         .clipShape(RoundedRectangle(cornerRadius: AppTheme.cardCornerRadius, style: .continuous))
-        .shadow(color: AppTheme.primary.opacity(0.2), radius: 12, y: 6)
     }
 }
 
@@ -51,45 +48,43 @@ struct HeroStatPill: View {
     var highlight: Bool = false
 
     var body: some View {
-        VStack(spacing: 2) {
+        VStack(spacing: 3) {
             Image(systemName: icon)
                 .font(.caption2.weight(.semibold))
-                .foregroundStyle(highlight ? Color.yellow : .white.opacity(0.9))
+                .foregroundStyle(highlight ? Color.yellow.opacity(0.95) : .white.opacity(0.9))
             Text(value)
-                .font(.subheadline.weight(.bold))
+                .font(AppFont.callout(.bold))
                 .foregroundStyle(.white)
             Text(label)
-                .font(.caption2)
+                .font(AppFont.caption2())
                 .foregroundStyle(.white.opacity(0.75))
                 .lineLimit(1)
-                .minimumScaleFactor(0.8)
+                .minimumScaleFactor(0.75)
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 8)
-        .background(.white.opacity(0.14))
-        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .background(.white.opacity(0.12))
+        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
     }
 }
 
 // MARK: - Section Header
 
 struct SectionHeaderView: View {
-    @Environment(\.layoutMetrics) private var metrics
-
     let title: String
     var action: (() -> Void)?
     var actionLabel: String?
 
     var body: some View {
-        HStack(alignment: .firstTextBaseline) {
+        HStack(alignment: .center) {
             Text(title)
-                .font(metrics.sectionTitle)
+                .font(AppFont.headline())
                 .foregroundStyle(.primary)
             Spacer()
             if let action, let actionLabel {
                 Button(action: action) {
                     Text(actionLabel)
-                        .font(.caption.weight(.semibold))
+                        .font(AppFont.caption(.semibold))
                         .foregroundStyle(AppTheme.primary)
                 }
             }
@@ -101,14 +96,14 @@ struct SectionHeaderView: View {
 
 struct ProgressRingView: View {
     let progress: Double
-    var lineWidth: CGFloat = 6
-    var size: CGFloat = 48
+    var lineWidth: CGFloat = 5
+    var size: CGFloat = 44
     var tint: Color = AppTheme.primary
 
     var body: some View {
         ZStack {
             Circle()
-                .stroke(tint.opacity(0.15), lineWidth: lineWidth)
+                .stroke(tint.opacity(0.12), lineWidth: lineWidth)
             Circle()
                 .trim(from: 0, to: min(max(progress, 0), 1))
                 .stroke(tint, style: StrokeStyle(lineWidth: lineWidth, lineCap: .round))
@@ -116,7 +111,7 @@ struct ProgressRingView: View {
                 .animation(.spring(duration: 0.4), value: progress)
 
             Text("\(Int(progress * 100))%")
-                .font(.system(size: max(size * 0.2, 9), weight: .bold, design: .rounded))
+                .font(.system(size: max(size * 0.19, 8), weight: .semibold, design: .rounded))
                 .foregroundStyle(tint)
                 .minimumScaleFactor(0.7)
         }
@@ -144,22 +139,22 @@ struct StatusBadge: View {
             case .overdue: AppTheme.danger
             case .dueSoon: AppTheme.warning
             case .paid: AppTheme.success
-            case .neutral: .secondary
+            case .neutral: AppTheme.textTertiary
             }
         }
 
-        var background: Color { foreground.opacity(0.12) }
+        var background: Color { foreground.opacity(0.1) }
     }
 
     let style: Style
 
     var body: some View {
         Text(style.label)
-            .font(.caption2.weight(.bold))
+            .font(AppFont.caption2(.semibold))
             .foregroundStyle(style.foreground)
             .lineLimit(1)
             .fixedSize(horizontal: true, vertical: false)
-            .padding(.horizontal, 7)
+            .padding(.horizontal, 8)
             .padding(.vertical, 3)
             .background(style.background)
             .clipShape(Capsule())
@@ -180,16 +175,23 @@ struct FilterChipBar<T: Hashable & Identifiable>: View where T: RawRepresentable
                         withAnimation(.snappy) { selection = option }
                     } label: {
                         Text(option.rawValue)
-                            .font(.caption.weight(.semibold))
-                            .foregroundStyle(selection == option ? .white : .secondary)
-                            .padding(.horizontal, 12)
+                            .font(AppFont.caption(.semibold))
+                            .foregroundStyle(selection == option ? .white : AppTheme.textSecondary)
+                            .padding(.horizontal, 14)
                             .padding(.vertical, 8)
                             .background(
                                 selection == option
-                                    ? AnyShapeStyle(AppTheme.heroGradient)
+                                    ? AnyShapeStyle(AppTheme.primary)
                                     : AnyShapeStyle(AppTheme.cardBackground)
                             )
                             .clipShape(Capsule())
+                            .overlay {
+                                Capsule()
+                                    .strokeBorder(
+                                        selection == option ? Color.clear : AppTheme.border,
+                                        lineWidth: 1
+                                    )
+                            }
                     }
                     .buttonStyle(.plain)
                 }
@@ -210,26 +212,29 @@ struct EmptyStateView: View {
     var body: some View {
         VStack(spacing: AppTheme.spacingM) {
             Image(systemName: icon)
-                .font(.system(size: 36))
-                .foregroundStyle(AppTheme.primary.opacity(0.6))
+                .font(.system(size: 32, weight: .light))
+                .foregroundStyle(AppTheme.primary.opacity(0.5))
                 .symbolRenderingMode(.hierarchical)
+                .frame(width: 56, height: 56)
+                .background(AppTheme.primarySoft)
+                .clipShape(Circle())
 
-            VStack(spacing: 4) {
+            VStack(spacing: 6) {
                 Text(title)
-                    .font(.subheadline.weight(.semibold))
+                    .font(AppFont.body(.semibold))
                 Text(message)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(AppFont.caption())
+                    .foregroundStyle(AppTheme.textSecondary)
                     .multilineTextAlignment(.center)
             }
 
             if let buttonTitle, let action {
                 Button(buttonTitle, action: action)
                     .buttonStyle(PrimaryButtonStyle())
-                    .padding(.horizontal, AppTheme.spacingL)
+                    .frame(maxWidth: 240)
             }
         }
-        .padding(AppTheme.spacingL)
+        .padding(AppTheme.spacingXL)
         .frame(maxWidth: .infinity)
     }
 }
@@ -241,11 +246,11 @@ struct FormField<Content: View>: View {
     @ViewBuilder let content: Content
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text(title)
-                .font(.caption2.weight(.semibold))
-                .foregroundStyle(.secondary)
-                .textCase(.uppercase)
+        VStack(alignment: .leading, spacing: 8) {
+            Text(title.uppercased())
+                .font(AppFont.labelUppercase)
+                .foregroundStyle(AppTheme.textTertiary)
+                .tracking(0.5)
             content
         }
     }
@@ -267,60 +272,30 @@ struct StyledTextField: View {
             TextField(placeholder, text: $text)
             #endif
         }
-        .font(.subheadline)
+        .font(AppFont.body())
         .padding(AppTheme.spacingM)
         .background(AppTheme.appBackground)
         .clipShape(RoundedRectangle(cornerRadius: AppTheme.cornerRadius, style: .continuous))
+        .overlay {
+            RoundedRectangle(cornerRadius: AppTheme.cornerRadius, style: .continuous)
+                .strokeBorder(AppTheme.border, lineWidth: 1)
+        }
     }
 }
 
-// MARK: - Upcoming Row Card
+// MARK: - List row container
 
-struct UpcomingPaymentCard: View {
-    @Environment(\.layoutMetrics) private var metrics
-
-    let installment: Installment
-
-    private var status: StatusBadge.Style {
-        if installment.isOverdue { return .overdue }
-        if installment.isDueSoon { return .dueSoon }
-        return .neutral
-    }
+struct ProListRow<Content: View>: View {
+    @ViewBuilder let content: Content
 
     var body: some View {
-        HStack(spacing: AppTheme.spacingS) {
-            ZStack {
-                RoundedRectangle(cornerRadius: 10, style: .continuous)
-                    .fill(AppTheme.primarySoft.opacity(0.6))
-                    .frame(width: 36, height: 36)
-                Image(systemName: "calendar")
-                    .font(.caption.weight(.semibold))
-                    .foregroundStyle(AppTheme.primary)
+        content
+            .padding(AppTheme.spacingM)
+            .background(AppTheme.cardBackground)
+            .clipShape(RoundedRectangle(cornerRadius: AppTheme.cornerRadius, style: .continuous))
+            .overlay {
+                RoundedRectangle(cornerRadius: AppTheme.cornerRadius, style: .continuous)
+                    .strokeBorder(AppTheme.border, lineWidth: 1)
             }
-
-            VStack(alignment: .leading, spacing: 2) {
-                Text(installment.loan?.name ?? "Kredyt")
-                    .font(metrics.bodyStrong)
-                    .lineLimit(1)
-                Text(Formatters.date(installment.dueDate))
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
-            }
-
-            Spacer(minLength: 4)
-
-            VStack(alignment: .trailing, spacing: 2) {
-                Text(Formatters.currency(installment.amount))
-                    .font(.caption.weight(.bold))
-                    .monospacedDigit()
-                if status != .neutral {
-                    StatusBadge(style: status)
-                }
-            }
-        }
-        .padding(metrics.cardInset)
-        .background(AppTheme.cardBackground)
-        .clipShape(RoundedRectangle(cornerRadius: AppTheme.cornerRadius, style: .continuous))
-        .shadow(color: AppTheme.cardShadow, radius: 4, y: 1)
     }
 }

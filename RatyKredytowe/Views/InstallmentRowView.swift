@@ -2,7 +2,6 @@ import SwiftData
 import SwiftUI
 
 struct InstallmentRowView: View {
-    @Environment(\.layoutMetrics) private var metrics
     @Bindable var installment: Installment
 
     private var badgeStyle: StatusBadge.Style? {
@@ -13,15 +12,15 @@ struct InstallmentRowView: View {
     }
 
     var body: some View {
-        HStack(spacing: AppTheme.spacingS) {
+        HStack(spacing: AppTheme.spacingM) {
             payButton
 
             VStack(alignment: .leading, spacing: 4) {
                 HStack(spacing: 6) {
                     Text(Formatters.date(installment.dueDate))
-                        .font(metrics.bodyStrong)
-                        .foregroundStyle(installment.isPaid ? .secondary : .primary)
-                        .strikethrough(installment.isPaid, color: .secondary)
+                        .font(AppFont.body(.semibold))
+                        .foregroundStyle(installment.isPaid ? AppTheme.textSecondary : .primary)
+                        .strikethrough(installment.isPaid, color: AppTheme.textTertiary)
                         .lineLimit(1)
 
                     if let badgeStyle = badgeStyle {
@@ -31,14 +30,14 @@ struct InstallmentRowView: View {
 
                 if installment.isPaid, let paidDate = installment.paidDate {
                     Text("Spłacono \(Formatters.date(paidDate))")
-                        .font(.caption2)
+                        .font(AppFont.caption2())
                         .foregroundStyle(AppTheme.success)
                 }
 
                 if !installment.note.isEmpty {
                     Text(installment.note)
-                        .font(.caption2)
-                        .foregroundStyle(.secondary)
+                        .font(AppFont.caption2())
+                        .foregroundStyle(AppTheme.textSecondary)
                         .lineLimit(1)
                 }
             }
@@ -46,24 +45,13 @@ struct InstallmentRowView: View {
             Spacer(minLength: 4)
 
             Text(Formatters.currency(installment.amount))
-                .font(.caption.weight(.bold))
+                .font(AppFont.callout(.bold))
                 .monospacedDigit()
-                .foregroundStyle(installment.isPaid ? .secondary : .primary)
+                .foregroundStyle(installment.isPaid ? AppTheme.textSecondary : .primary)
                 .lineLimit(1)
                 .minimumScaleFactor(0.8)
         }
-        .padding(metrics.cardInset)
-        .background(AppTheme.cardBackground)
-        .clipShape(RoundedRectangle(cornerRadius: AppTheme.cornerRadius, style: .continuous))
-        .overlay {
-            RoundedRectangle(cornerRadius: AppTheme.cornerRadius, style: .continuous)
-                .strokeBorder(
-                    installment.isOverdue && !installment.isPaid
-                        ? AppTheme.danger.opacity(0.3)
-                        : Color.clear,
-                    lineWidth: 1
-                )
-        }
+        .appCard(bordered: installment.isOverdue && !installment.isPaid)
         .opacity(installment.isPaid ? 0.88 : 1)
         .animation(.snappy, value: installment.isPaid)
         #if os(iOS)
@@ -85,10 +73,10 @@ struct InstallmentRowView: View {
                 Circle()
                     .fill(
                         installment.isPaid
-                            ? AppTheme.success.opacity(0.15)
-                            : AppTheme.primarySoft.opacity(0.5)
+                            ? AppTheme.success.opacity(0.12)
+                            : AppTheme.primarySoft
                     )
-                    .frame(width: 36, height: 36)
+                    .frame(width: 34, height: 34)
 
                 Image(systemName: installment.isPaid ? "checkmark" : "circle")
                     .font(.subheadline.weight(.semibold))
@@ -96,7 +84,6 @@ struct InstallmentRowView: View {
             }
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(installment.isPaid ? "Oznacz jako niespłacone" : "Oznacz jako spłacone")
     }
 
     private var payButtonColor: Color {
@@ -107,11 +94,8 @@ struct InstallmentRowView: View {
 
     private func togglePaid() {
         withAnimation(.snappy) {
-            if installment.isPaid {
-                installment.markUnpaid()
-            } else {
-                installment.markPaid()
-            }
+            if installment.isPaid { installment.markUnpaid() }
+            else { installment.markPaid() }
         }
     }
 }
