@@ -2,9 +2,6 @@
 
 Nowoczesna aplikacja desktopowa stworzona w Swift, służąca do organizacji codziennych spraw w jednym miejscu.  
 Aplikacja umożliwia zarządzanie notatkami, hasłami, linkami oraz zobowiązaniami finansowymi poprzez przejrzysty i minimalistyczny interfejs.
-
-![Preview aplikacji](./assets/preview.png)
-
 ---
 
 # ✨ Funkcje
