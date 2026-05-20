@@ -1,67 +1,67 @@
 # 🧠 Centrum Spraw
 
-Nowoczesna aplikacja desktopowa do zarządzania codziennymi sprawami — notatkami, hasłami, linkami oraz zobowiązaniami finansowymi — w jednym miejscu.
+Nowoczesna aplikacja desktopowa stworzona w Swift, służąca do organizacji codziennych spraw w jednym miejscu.  
+Aplikacja umożliwia zarządzanie notatkami, hasłami, linkami oraz zobowiązaniami finansowymi poprzez przejrzysty i minimalistyczny interfejs.
 
-## ✨ Funkcje
+![Preview aplikacji](./assets/preview.png)
 
-### 💳 Raty kredytowe
+---
+
+# ✨ Funkcje
+
+## 💳 Raty kredytowe
+Moduł umożliwiający:
 - dodawanie zobowiązań finansowych,
-- harmonogram spłat,
-- kontrola terminów i rat,
-- przejrzysty podgląd wszystkich zobowiązań.
+- kontrolowanie harmonogramu spłat,
+- monitorowanie terminów rat,
+- szybki podgląd aktywnych zobowiązań.
 
-### 📝 Notatnik
-- szybkie tworzenie notatek,
-- przechowywanie ważnych informacji,
-- organizacja zadań i danych.
+## 📝 Notatnik
+- tworzenie i edycja notatek,
+- organizacja ważnych informacji,
+- przechowywanie codziennych zadań i danych.
 
-### 🎯 Cele oszczędnościowe
+## 🎯 Cele oszczędnościowe
 - ustawianie celów finansowych,
-- monitorowanie postępu oszczędzania,
-- motywacja do realizacji planów.
+- śledzenie postępów oszczędzania,
+- planowanie budżetu.
 
-### 🔗 Skróty i linki
+## 🔗 Skróty i linki
 - zapisywanie ulubionych stron,
-- przechowywanie loginów i ważnych odnośników,
-- szybki dostęp do najczęściej używanych zasobów.
+- szybki dostęp do ważnych linków,
+- możliwość przechowywania loginów oraz danych dostępowych.
 
 ---
 
-## 🖥️ Technologie
+# 🖥️ Technologie
 
-Projekt został wykonany z wykorzystaniem:
+Projekt został wykonany wyłącznie w technologii:
 
-- Electron
-- React
-- TypeScript
-- TailwindCSS
-- SQLite / Local Storage
+- Swift
+- SwiftUI
 
 ---
 
-## 🎨 Interfejs
+# 🎨 Interfejs
 
-Aplikacja została zaprojektowana w nowoczesnym, ciemnym stylu inspirowanym minimalistycznymi dashboardami produktywności.
-
----
-
-## 🚀 Cel projektu
-
-Projekt został stworzony jako osobiste centrum organizacji codziennych spraw — jedno miejsce do:
-- zarządzania finansami,
-- przechowywania notatek,
-- organizowania ważnych linków i danych,
-- monitorowania celów.
+Aplikacja posiada nowoczesny, ciemny interfejs inspirowany minimalistycznymi dashboardami produktywności.  
+Całość została zaprojektowana z naciskiem na prostotę, przejrzystość oraz wygodę codziennego użytkowania.
 
 ---
 
-## 📦 Instalacja
+# 🚀 Cel projektu
+
+Celem projektu było stworzenie prywatnego centrum organizacji codziennych spraw, które pozwala w jednym miejscu:
+- zarządzać finansami,
+- przechowywać notatki,
+- organizować ważne linki i dane,
+- kontrolować cele finansowe oraz zobowiązania.
+
+---
+
+# 📦 Instalacja
 
 ```bash
 git clone https://github.com/twoj-login/nazwa-repo.git
 
 cd nazwa-repo
-
-npm install
-
-npm run dev
