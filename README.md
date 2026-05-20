@@ -2,8 +2,6 @@
 
 Nowoczesna aplikacja desktopowa do zarządzania codziennymi sprawami — notatkami, hasłami, linkami oraz zobowiązaniami finansowymi — w jednym miejscu.
 
-![Preview aplikacji](./assets/preview.png)
-
 ## ✨ Funkcje
 
 ### 💳 Raty kredytowe
